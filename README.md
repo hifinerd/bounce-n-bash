@@ -1,2 +1,2 @@
 # p5.play-boilerplate
-Boiler plate for p5.play
+press up and down to move, and space to serve

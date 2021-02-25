@@ -7,7 +7,8 @@ function setup() {
 }
 
 function draw() {
-  background(0);  
+  background(0);
+  text("Score:"+score,50,10)  
   if(keyDown("up")){
     player.y= player.y - 10
   }
@@ -17,7 +18,7 @@ function draw() {
   if(keyDown("space")){
     player.velocityX = 15
   }
-  if(player.x > 800){
+  if(player.x > 800 || player.x < 0){
     player.x = 40
     player.velocityX = 0
   }
@@ -26,14 +27,15 @@ function draw() {
   spawnAliens();
   for(var i=0;i<alienGroup.length;i++){
     if(alienGroup[i].isTouching(player)){
+      player.bounceOff(alienGroup[i])
       alienGroup[i].destroy();
       score = score + 10
     }
   }
 }
 function spawnAliens(){
-  if (frameCount % 20 === 0){
-    var randX = Math.round(random(500,800));
+  if (frameCount % 15 === 0){
+    var randX = Math.round(random(0,800));
    alien = createSprite(randX,0,20,20);
     
      //generate random obstacles                                                                                   
@@ -46,5 +48,20 @@ function spawnAliens(){
     
     //add each obstacle to the group
      
-  }
+  if (frameCount % 25 === 0){
+    var randA = Math.round(random(500,800));
+   alien = createSprite(randA,600,20,20);
+    
+     //generate random obstacles                                                                                   
+     
+     var randB = Math.round(random(-5,-15));
+     alien.velocityB = randB;
+     alienGroup.add(alien); 
+     alien.lifetime = 500
+     }
+    
+    //add each obstacle to the group
+    }
+  
+     
  
