@@ -1,4 +1,4 @@
-var player, alien, alienGroup
+var player, alien, alienGroup, score = 0
 
 function setup() {
   createCanvas(800,400);
@@ -24,6 +24,12 @@ function draw() {
   
   drawSprites();
   spawnAliens();
+  for(var i=0;i<alienGroup.length;i++){
+    if(alienGroup[i].isTouching(player)){
+      alienGroup[i].destroy();
+      score = score + 10
+    }
+  }
 }
 function spawnAliens(){
   if (frameCount % 20 === 0){
@@ -39,6 +45,6 @@ function spawnAliens(){
      }
     
     //add each obstacle to the group
-
+     
   }
  
